@@ -1,0 +1,16 @@
+{
+  "name": "osu-beatmap-info-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "ojsama": "^1.2.3",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Exsper",
+  "license": "ISC"
+}
