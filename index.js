@@ -54,7 +54,7 @@ module.exports.apply = (ctx, options) => {
         try {
             const message = meta.message;
             const userId = meta.userId;
-            let reply = await ob.apply(userId, message);
+            let reply = await ob.apply(message);
             if (reply) {
                 await meta.$send(`[CQ:at,qq=${userId}]` + '\n' + reply);
             } else return next();
