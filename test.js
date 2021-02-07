@@ -1,6 +1,6 @@
 "use strict";
 
-const OsuBeatmapInfo = require("./index");
+const OsuBeatmapInfo = require("./index").OsuBeatmapInfo;
 let obi = new OsuBeatmapInfo({
     apiKey: require("./apiToken.json").apiToken,
     toMappoolRowCmd: "m",

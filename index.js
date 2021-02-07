@@ -45,7 +45,7 @@ class OsuBeatmapInfo {
 
 }
 
-module.exports = OsuBeatmapInfo;
+module.exports.OsuBeatmapInfo = OsuBeatmapInfo;
 // koishi插件
 module.exports.name = 'osu-beatmap-info-v2';
 module.exports.apply = (ctx, options) => {
