@@ -45,5 +45,25 @@ class OsuBeatmapInfo {
 
 }
 
-
 module.exports = OsuBeatmapInfo;
+// koishi插件
+module.exports.name = 'osu-beatmap-info-v2';
+module.exports.apply = (ctx, options) => {
+    const ob = new OsuBeatmapInfo(options);
+    ctx.middleware(async (meta, next) => {
+        try {
+            const message = meta.message;
+            const userId = meta.userId;
+            let reply = await ob.apply(userId, message);
+            if (reply) {
+                await meta.$send(`[CQ:at,qq=${userId}]` + '\n' + reply);
+            } else return next();
+        } catch (ex) {
+            console.log(ex);
+            return next();
+        }
+    })
+}
+
+
+
