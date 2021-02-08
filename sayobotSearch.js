@@ -11,14 +11,14 @@ class BeatmapInfo {
         this.creator = data.creator
         this.creator_id = data.creator_id
         this.source = data.source
-        if (!SpecDiff) this.beatmap = data.bid_data.pop()
+        if (!SpecDiff) this.beatmap = this.getHighestDiffBeatmap(data.bid_data)
         else {
             data.bid_data.map((bdata) => {
                 const version = bdata.version.toLowerCase();
                 const diff = SpecDiff.toLowerCase();
                 if (version.indexOf(diff) >= 0) this.beatmap = bdata
             })
-            if (!this.beatmap) this.beatmap = data.bid_data.pop()
+            if (!this.beatmap) this.beatmap = this.getHighestDiffBeatmap(data.bid_data)
         }
         this.bid = this.beatmap.bid
         this.duration = this.beatmap.length
@@ -32,6 +32,11 @@ class BeatmapInfo {
 
         this.setLink = `https://osu.ppy.sh/beatmapsets/${this.sid}`
 
+    }
+
+    getHighestDiffBeatmap(bid_data) {
+        const sorted = bid_data.sort((a, b) => a.star - b.star);
+        return sorted.pop();
     }
 }
 
