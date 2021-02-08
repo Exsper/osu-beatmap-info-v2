@@ -79,7 +79,7 @@ class Command {
                     keyword = keyword.split("[")[0];
                 }
                 let beatmapSetId = await SayobotSearch.searchList(keyword);
-                this.beatmapId = await SayobotSearch.search(beatmapSetId, diffname).bid;
+                this.beatmapId = await SayobotSearch.search(beatmapSetId, diffname);
             }
             else throw this.help;
         }
@@ -117,7 +117,7 @@ class Command {
             if ((this.commandString !== toMappoolRowCmd) && (this.commandString !== toCalPPStringCmd)) return "";
             await this.getArgObject();
             let beatmapInfo = await ApiRequest.getBeatmapsById(this.beatmapId, apiKey);
-            if (beatmapInfo.length <= 0) return "查询不到该beatmap";
+            if (beatmapInfo.length <= 0) return "查询不到该beatmap（谱面setId：" + this.beatmapId + "）";
             let beatmapObject = new BeatmapObject(beatmapInfo[0], this.options);
             if (this.commandString === toMappoolRowCmd) return await beatmapObject.toStringSimple();
             if (this.commandString === toCalPPStringCmd) return await beatmapObject.toString();

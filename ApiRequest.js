@@ -26,7 +26,7 @@ class OsuApi {
                 console.log("获取api时超过最大重试次数，停止获取");
                 return { code: "error" };
             }
-            console.log("获取api列表失败，第" + (times + 1) + "次重试");
+            console.log("获取api失败，第" + (times + 1) + "次重试");
             return this.apiCall(_path, _data, times + 1);
         }
     }

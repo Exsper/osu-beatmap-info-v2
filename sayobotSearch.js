@@ -51,7 +51,8 @@ class SearchResult {
 class SayabotApi {
     static async apiRequestList(keyword) {
         const url = 'https://api.sayobot.cn/beatmaplist?0=1&1=0&2=4&' + querystring.stringify({ 3: keyword });
-        return await fetch(url).then(res => res.json());
+        const data = await fetch(url).then(res => res.json());
+        return data;
     }
     static async apiRequestV2(options) {
         const contents = (options) ? querystring.stringify(options) : ''
@@ -61,7 +62,7 @@ class SayabotApi {
     /**
        * sayobot搜索谱面
        * @param {String} keyword
-       * @returns {Number} 返回set id
+       * @returns {Promise<Number>} 返回set id
        */
     static async searchList(keyword) {
         const result = await this.apiRequestList(keyword);
@@ -73,7 +74,7 @@ class SayabotApi {
    * sayabot搜索谱面信息
    * @param {Number} sid setId
    * @param {String} diffName 难度名，为了获取指定难度的音频
-   * @returns {BeatmapInfo} 返回BeatmapInfo
+   * @returns {Promise<Number>} 返回bid
    */
     static async search(sid, diffName) {
         const params = { K: sid, T: 0 } // T=1 匹配bid
@@ -81,7 +82,7 @@ class SayabotApi {
         if (!result) throw '获取谱面详情失败';
         const searchResult = new SearchResult(result, diffName)
         if (!searchResult.success()) throw '查不到该谱面信息（谱面setId：' + sid + '）'
-        return searchResult.beatmapInfo
+        return searchResult.beatmapInfo.bid;
     }
 }
 
